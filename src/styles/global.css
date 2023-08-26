@@ -2,17 +2,18 @@
   /* colors custom props */
   --dark-blue: #070439; /* footer background & heading text  */
   --pale-blue: #585989; /* call to action background & body text */
-  --light-blue: #628af9; /* actions hover */
+  --light-blue: #527ffa; /* actions hover */
   --blue: #3065f8; /* actions */
   --green: #3c9f8f; /* links  */
   --light-green: #4ce6cc; /* links hover */
-  --white: #f6f6fe; /* body background & accent text */
+  --white-1: #ffffff; /* body background & accent text */
+  --white-2: #f8f8fe; /* body background & accent text */
   --gray: #bfbfbf; /* background neutral */
   --red: #ff4242;
 
   /* backgrounds */
-  --bg-body: var(--white);
-  --bg-neutral: var(--gray);
+  --bg-body: var(--white-1);
+  --bg-neutral: var(--white-2);
   --bg-footer: var(--dark-blue);
   --bg-accent: var(--pale-blue);
   --bg-btn: var(--blue);
@@ -23,9 +24,10 @@
   --ff-body: "Open Sans", sans-serif;
   --text-body: var(--pale-blue);
   --text-heading: var(--dark-blue);
-  --text-accent: var(--white);
-  --text-links: var(--green);
-  --text-links-hover: var(--light-green);
+  --text-accent: var(--blue);
+  --text-inverted: var(--white-2);
+  --text-link: var(--green);
+  --text-link-hover: var(--light-green);
   --text-error: var(--red);
   --fw-normal: 400;
   --fw-bold: 700;
@@ -35,7 +37,6 @@ html {
   height: 100%;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  color-scheme: dark;
 }
 
 * {
@@ -78,11 +79,11 @@ a {
 }
 
 a:hover {
-  color: var(--cyan);
+  color: var(--text-link-hover);
 }
 
 a:focus-visible {
-  outline: 0.125rem solid var(--cyan);
+  outline: 0.125rem solid var(--text-link-hover);
   outline-offset: 0.375rem;
 }
 
@@ -102,4 +103,37 @@ li {
   position: absolute;
   white-space: nowrap;
   overflow: hidden;
+}
+/* composition styles */
+.container {
+  width: min(100%, var(--container-width, 82rem));
+  margin-inline: auto;
+  padding-inline: var(--container-padding, 1rem);
+}
+.wrapper {
+  max-width: var(--wrapper-width, 68ch);
+  display: grid;
+  gap: var(--wrapper-gap, 1.25rem);
+}
+.two-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--tcg-gap, 2rem);
+}
+@media (max-width: 54rem) {
+  .two-columns-grid {
+    grid-template-columns: 1fr;
+  }
+  .two-columns-grid > :where(:nth-child(2)) {
+    grid-row: 1;
+  }
+}
+
+/* utilities */
+.place-center {
+  display: grid;
+  place-content: center;
+}
+.bg-neutral {
+  background-color: var(--bg-neutral);
 }
