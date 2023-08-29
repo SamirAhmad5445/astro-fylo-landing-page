@@ -2,13 +2,13 @@
 export interface Props {
   id: string;
   placeholder?: string;
-  errors?: string;
+  isBordered?: boolean;
 }
 
-const { id, placeholder, errors = "" } = Astro.props;
+const { id, placeholder, isBordered = true } = Astro.props;
 ---
 
-<label class="input-wrapper" data-error={errors}>
+<label class:list={["input-wrapper", { bordered: isBordered }]} data-error="">
   <input type="text" id={id} placeholder={placeholder} />
 </label>
 
@@ -19,13 +19,17 @@ const { id, placeholder, errors = "" } = Astro.props;
   .input-wrapper > input {
     display: block;
     width: 100%;
-    border: 0.125rem solid var(--gray);
     color: var(--text-body);
     font-size: 1rem;
     caret-color: var(--text-accent);
-    background-color: var(--white);
+    background-color: var(--white-1);
+    color: var(--text-body);
+    border: 0;
     border-radius: 0.25rem;
     padding: 0.5rem 1rem;
+  }
+  .input-wrapper:is(.bordered) > input {
+    border: 0.0625rem solid var(--dark-blue);
   }
   .input-wrapper > input:focus-visible {
     border-color: var(--text-accent);

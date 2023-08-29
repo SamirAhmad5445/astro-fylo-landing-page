@@ -3,36 +3,45 @@ import Input from "./Input.astro";
 import Button from "./Button.astro";
 ---
 
-<div class="hero | two-columns-grid container">
-  <!-- column one: content + call to action -->
-  <div class="hero-content | place-center">
-    <h1 class="site-heading">
-      All your files in one secure location, accessible anywhere.
-    </h1>
-    <p class="description">
-      Fylo stores your most important files in one secure location. Access them
-      wherever you need, share and collaborate with friends, family, and
-      co-workers.
-    </p>
-    <form class="subscribe-form" data-prevent-default>
-      <Input id="email1" placeholder="Enter your email..." />
-      <Button>Get Started</Button>
-    </form>
-  </div>
-  <!-- column two: hero image -->
-  <div class="hero-image place-center">
-    <img src="/assets/illustration-1.svg" alt="Accessible Anywhere" />
+<div class="hero-wrapper">
+  <div class="hero | container two-columns-grid">
+    <!--* column one: content + call to action -->
+    <div class="hero-content">
+      <h1 class="site-heading">
+        All your files in one secure location, accessible anywhere.
+      </h1>
+      <p class="description">
+        Fylo stores your most important files in one secure location. Access
+        them wherever you need, share and collaborate with friends, family, and
+        co-workers.
+      </p>
+      <form class="subscribe-form" data-prevent-default>
+        <Input id="email1" placeholder="Enter your email..." />
+        <Button>Get Started</Button>
+      </form>
+    </div>
+    <!--* column two: hero image -->
+    <div class="hero-image | image-wrapper">
+      <img src="/assets/illustration-1.svg" alt="Accessible Anywhere" />
+    </div>
   </div>
 </div>
 
 <style>
   .hero {
+    --hero-padding: 2.5rem;
+    padding-block: var(--hero-padding) calc(var(--hero-padding) * 6);
+  }
+  .hero-wrapper {
     background-color: var(--bg-hero);
     background-image: url(../assets/bg-curve-desktop.svg);
     background-size: 100%;
     background-position: bottom left;
     background-repeat: no-repeat;
-    padding-block: 1.5rem 3rem;
+  }
+  .hero-content {
+    display: grid;
+    place-content: center;
   }
   .hero-content > * + * {
     margin-block-start: 1rem;
@@ -50,8 +59,8 @@ import Button from "./Button.astro";
     grid-template-columns: 2fr 1fr;
     gap: 0.75rem;
   }
-  @media (max-width: 48rem) {
-    .hero {
+  @media (max-width: 42rem) {
+    .hero-wrapper {
       background-image: url(../assets/bg-curve-mobile.svg);
       text-align: center;
     }

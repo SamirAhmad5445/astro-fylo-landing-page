@@ -28,9 +28,13 @@
   --text-inverted: var(--white-2);
   --text-link: var(--green);
   --text-link-hover: var(--light-green);
+  --text-link-outline: var(--blue);
   --text-error: var(--red);
   --fw-normal: 400;
   --fw-bold: 700;
+
+  /* layout custom props */
+  --container-padding: 2.5rem;
 }
 
 html {
@@ -83,7 +87,7 @@ a:hover {
 }
 
 a:focus-visible {
-  outline: 0.125rem solid var(--text-link-hover);
+  outline: 0.125rem solid var(--text-link-outline);
   outline-offset: 0.375rem;
 }
 
@@ -108,7 +112,7 @@ li {
 .container {
   width: min(100%, var(--container-width, 82rem));
   margin-inline: auto;
-  padding-inline: var(--container-padding, 1rem);
+  padding-inline: var(--container-padding, 1);
 }
 .wrapper {
   max-width: var(--wrapper-width, 68ch);
@@ -120,19 +124,25 @@ li {
   grid-template-columns: repeat(2, 1fr);
   gap: var(--tcg-gap, 2rem);
 }
-@media (max-width: 54rem) {
+@media (max-width: 57.5rem) {
   .two-columns-grid {
     grid-template-columns: 1fr;
   }
-  .two-columns-grid > :where(:nth-child(2)) {
+  .two-columns-grid:not([data-grid-revers]) > :where(:nth-child(2)) {
     grid-row: 1;
   }
 }
 
 /* utilities */
-.place-center {
+.image-wrapper {
   display: grid;
   place-content: center;
+  padding: 3rem;
+}
+@media (max-width: 57.5rem) {
+  .image-wrapper {
+    padding: 0;
+  }
 }
 .bg-neutral {
   background-color: var(--bg-neutral);

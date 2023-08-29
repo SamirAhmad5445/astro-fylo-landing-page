@@ -1,0 +1,57 @@
+---
+import Button from "./Button.astro";
+import Input from "./Input.astro";
+---
+
+<div class="cta">
+  <div class="two-columns-grid container" data-grid-revers>
+    <div class="cta-content">
+      <h2>Get early access today</h2>
+      <p>
+        It only takes a minute to sign up and our free starter tier is extremely
+        generous. If you have any questions, our support team would be happy to
+        help you.
+      </p>
+    </div>
+    <form class="cta-form" data-prevent-default>
+      <Input id="email2" placeholder="email@example.com" isBordered={false} />
+      <Button>Get Started For Free</Button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .cta {
+    background-color: var(--bg-accent);
+    color: var(--text-inverted);
+    padding-block: 3rem;
+  }
+  .cta-content {
+    max-width: 54ch;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .cta-content > * {
+    margin-block-end: 1rem;
+  }
+  .cta-content h2 {
+    color: currentColor;
+  }
+  .cta-form {
+    display: grid;
+  }
+  :global(.cta-form > *) {
+    margin-block-start: 0.5rem;
+  }
+  @media (min-width: 57.5rem) {
+    .cta {
+      --tcg-gap: 10rem;
+    }
+    .cta-content {
+      text-align: start;
+    }
+    .cta-form {
+      display: block;
+    }
+  }
+</style>

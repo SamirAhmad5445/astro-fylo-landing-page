@@ -1,0 +1,49 @@
+---
+import { Icon } from "astro-icon";
+export interface Props {
+  pic: string;
+  name: string;
+  title: string;
+}
+const { pic, name, title } = Astro.props;
+---
+
+<div class="profile-card">
+  <div class="quotes">
+    <Icon name="quotes" size={24} />
+  </div>
+  <p class="content">
+    <slot />
+  </p>
+  <div class="info">
+    <div class="image">
+      <img src={pic} alt={`${name}'s profile pic`} />
+    </div>
+    <p class="name">{name}</p>
+    <small class="description">{title}</small>
+  </div>
+</div>
+
+<style>
+  .profile-card {
+    --img-size: 2rem;
+    background-color: var(--white-1);
+    max-width: 24rem;
+    padding: 2rem;
+  }
+  .info {
+    display: grid;
+    grid-template-columns: var(--img-size) 1fr;
+    grid-template-rows: repeat(2, calc(var(--img-size) * 0.5));
+    align-items: center;
+    gap: 0.125rem 0.5rem;
+    margin-top: 1rem;
+  }
+  .image {
+    grid-row: span 2;
+  }
+  .image > img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+</style>

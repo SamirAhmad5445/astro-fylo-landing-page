@@ -7,10 +7,61 @@ import Layout from "../layouts/Layout.astro";
 
 // components
 import Hero from "../components/Hero.astro";
+import Navbar from "../components/Navbar.astro";
+import Button from "../components/Button.astro";
+import ProfileCard from "../components/ProfileCard.astro";
+import CallToAction from "../components/CallToAction.astro";
 ---
 
 <Layout title="Fylo • Accessible Anywhere">
-  <Hero />
+  <header slot="header">
+    <Navbar />
+  </header>
+  <main slot="main">
+    <Hero />
+    <!--* second section: illustration -->
+    <section
+      class="illustration-wrapper | bg-neutral"
+      aria-label="Illustration Section"
+    >
+      <div class="container two-columns-grid">
+        <!--* Column one: illustration content -->
+        <div class="illustration">
+          <h2 class="illustration-title">Stay productive, wherever you are</h2>
+          <div class="illustration-content">
+            <p>
+              Never let location be an issue when accessing your files. Fylo has
+              you covered for all of your file storage needs.
+            </p>
+            <p>
+              Securely share files and folders with friends, family and
+              colleagues for live collaboration. No email attachments required!
+            </p>
+            <Button type="link" icon={{ pos: "after", src: "arrow" }}>
+              See how Fylo works
+            </Button>
+          </div>
+          <div class="testimonial">
+            <ProfileCard
+              pic="/assets/avatar-testimonial.jpg"
+              name="Kyle Burton"
+              title="Founder & CEO, Huddle"
+            >
+              Fylo has improved our team productivity by an order of magnitude.
+              Since making the switch our team has become a well-oiled
+              collaboration machine.
+            </ProfileCard>
+          </div>
+        </div>
+        <!--* Column two: illustration image -->
+        <div class="illustration-image | image-wrapper">
+          <img src="/assets/illustration-2.svg" alt="Team Works on a project" />
+        </div>
+      </div>
+    </section>
+    <CallToAction />
+  </main>
+  <footer slot="footer"></footer>
 </Layout>
 
 <script>
@@ -18,3 +69,33 @@ import Hero from "../components/Hero.astro";
     form.addEventListener("submit", (event) => event.preventDefault());
   });
 </script>
+
+<style>
+  .illustration {
+    display: grid;
+    gap: 3rem;
+    margin-block: 2rem;
+    padding-block: 2rem;
+  }
+  .illustration-title {
+    font-size: 2rem;
+  }
+  .illustration-content {
+    color: var(--text-heading);
+    font-weight: var(--fw-bold);
+  }
+  .illustration-content > :not(:last-child) {
+    max-width: 62ch;
+    margin-block-end: 1rem;
+  }
+  @media (max-width: 57.5rem) {
+    .illustration-title {
+      text-align: center;
+    }
+  }
+  @media (max-width: 42rem) {
+    .testimonial {
+      margin: auto;
+    }
+  }
+</style>

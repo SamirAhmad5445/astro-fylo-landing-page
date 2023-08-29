@@ -1,20 +1,66 @@
-<button class="btn"><slot /></button>
+---
+// libraries
+import Icon from "astro-icon";
 
-<style>
+export interface props {
+  type?: "primary" | "link";
+  classes?: string;
+  icon?: {
+    pos: "after" | "before";
+    src: string;
+  };
+}
+
+const {
+  type = "primary",
+  classes = "",
+  icon = { pos: "", src: "mdi:help" },
+  ...rest
+} = Astro.props;
+---
+
+<button class={`btn btn-${type} ${classes}`} {...rest}>
+  {icon.pos === "before" && <Icon name={icon.src} size={18} class="btn-icon" />}
+  <slot />
+  {icon.pos === "after" && <Icon name={icon.src} size={18} class="btn-icon" />}
+</button>
+
+<style is:global>
   .btn {
-    background-color: var(--bg-btn);
-    color: var(--text-inverted);
-    padding: 0.75rem 1.5rem;
-    border: 0;
-    border-radius: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--_bg);
+    color: var(--_text);
+    padding: var(--_padding);
+    border: var(--_border);
+    border-radius: var(--_border-radius);
     outline-offset: -0.125rem;
-    transition: background-color 300ms, outline-offset 150ms;
+    transition: background-color 300ms, outline-offset 150ms, color 200ms;
   }
   .btn:hover {
-    background-color: var(--bg-btn-hover);
+    background-color: var(--_bg-hover);
+    color: var(--_text-hover, var(--_text, currentColor));
   }
   .btn:focus-visible {
-    outline: 0.125rem solid var(--bg-btn-hover);
+    outline: 0.125rem solid var(--_outline-color);
     outline-offset: 0.125rem;
+  }
+  /* modifiers */
+  .btn-primary {
+    --_bg: var(--bg-btn);
+    --_bg-hover: var(--bg-btn-hover);
+    --_padding: 0.75rem 1.5rem;
+    --_border: 0;
+    --_border-radius: 0.25rem;
+    --_text: var(--text-inverted);
+    --_outline-color: var(--bg-btn);
+  }
+  .btn-link {
+    --_text: var(--green);
+    --_text-hover: var(--light-green);
+    --_outline-color: var(--light-green);
+    border-bottom: 0.09rem solid currentColor;
   }
 </style>
