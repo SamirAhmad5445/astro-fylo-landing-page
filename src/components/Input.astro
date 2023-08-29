@@ -3,17 +3,41 @@ export interface Props {
   id: string;
   placeholder?: string;
   isBordered?: boolean;
+  errorColor?: "red" | "white";
 }
 
-const { id, placeholder, isBordered = true } = Astro.props;
+const { id, placeholder, isBordered = true, errorColor = "red" } = Astro.props;
 ---
 
-<label class:list={["input-wrapper", { bordered: isBordered }]} data-error="">
+<label
+  for={id}
+  class:list={[
+    "input-wrapper",
+    { bordered: isBordered, "error-white": errorColor === "white" },
+  ]}
+  data-error=""
+>
   <input type="text" id={id} placeholder={placeholder} />
 </label>
 
+<script define:vars={{ id: id }}>
+  let error = "";
+  const input = document.getElementById(id);
+  const label = document.querySelector(`[for=${id}]`);
+  const validate = () => {
+    let emailFormat = new RegExp(
+      "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-z]{2,3}"
+    );
+    emailFormat.test(input.value)
+      ? (error = "")
+      : (error = "Please enter a valid Email address.");
+    label.setAttribute("data-error", error);
+  };
+  input.addEventListener("change", validate);
+</script>
+
 <style>
-  .input-wrapper {
+   {
     display: block;
   }
   .input-wrapper > input {
@@ -34,5 +58,13 @@ const { id, placeholder, isBordered = true } = Astro.props;
   .input-wrapper > input:focus-visible {
     border-color: var(--text-accent);
     outline: transparent;
+  }
+  .input-wrapper::after {
+    content: attr(data-error);
+    display: block;
+    color: var(--text-error);
+  }
+  .input-wrapper:is(.error-white)::after {
+    --text-error: var(--white-2);
   }
 </style>
