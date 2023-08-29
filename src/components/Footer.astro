@@ -1,0 +1,95 @@
+---
+import Icon from "astro-icon";
+---
+
+<div
+  class="footer | container"
+  style="--container-width: 78rem;--container-padding: 3rem"
+>
+  <a href="/" class="logo">
+    <img src="./assets/logo-inverted.svg" alt="Fylo Home Page" />
+  </a>
+  <div class="footer-grid" style="margin-inline: auto;">
+    <div class="footer-col even-columns">
+      <span>
+        <Icon name="phone" size={18} />
+      </span>
+      <p>+1-543-123-4567</p>
+      <Icon name="email" size={18} />
+      <a href="mailto:samirahmad5445@gmail.com">example@fylo.com</a>
+    </div>
+    <nav class="footer-col footer-nav">
+      <ul class="stack">
+        <li><a href="#About">About Us</a></li>
+        <li><a href="#Jobs">Jobs</a></li>
+        <li><a href="#Press">Press</a></li>
+        <li><a href="#Blog">Blog</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col footer-nav">
+      <ul class="stack">
+        <li><a href="#Contact">Contact Us</a></li>
+        <li><a href="#Terms">Terms</a></li>
+        <li><a href="#Privacy">Privacy</a></li>
+      </ul>
+    </nav>
+    <div class="footer-col media-icons">
+      <a href="#"><Icon name="fa:facebook-f" size={20} /></a>
+      <a href="#"><Icon name="fa:twitter" size={24} /></a>
+      <a href="#"><Icon name="fa:instagram" size={24} /></a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .footer {
+    --footer-spacer: 3rem;
+    color: var(--text-inverted);
+    padding-block: 3rem;
+  }
+  .logo {
+    display: block;
+    margin-block-end: var(--footer-spacer);
+  }
+  .media-icons {
+    display: flex;
+    gap: 1rem;
+  }
+  .media-icons a {
+    display: grid;
+    place-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    border: 0.0625rem solid currentColor;
+    border-radius: 50%;
+  }
+  /* footer layout */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: space-between;
+    gap: var(--footer-spacer);
+  }
+  .even-columns {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    place-content: start;
+    gap: 0.5rem 1.5rem;
+  }
+  .stack {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  @media (min-width: 50rem) {
+    .footer-grid {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      gap: 2rem;
+    }
+    .footer-col:first-child {
+      grid-column: span 2;
+    }
+  }
+</style>

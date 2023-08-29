@@ -8,6 +8,7 @@ import Layout from "../layouts/Layout.astro";
 // components
 import Hero from "../components/Hero.astro";
 import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 import Button from "../components/Button.astro";
 import ProfileCard from "../components/ProfileCard.astro";
 import CallToAction from "../components/CallToAction.astro";
@@ -61,7 +62,9 @@ import CallToAction from "../components/CallToAction.astro";
     </section>
     <CallToAction />
   </main>
-  <footer slot="footer"></footer>
+  <footer slot="footer" class="bg-footer">
+    <Footer />
+  </footer>
 </Layout>
 
 <script>

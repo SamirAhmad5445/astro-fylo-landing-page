@@ -147,3 +147,6 @@ li {
 .bg-neutral {
   background-color: var(--bg-neutral);
 }
+.bg-footer {
+  background-color: var(--bg-footer);
+}
